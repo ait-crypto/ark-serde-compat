@@ -8,6 +8,7 @@ edition = "2024"
 rust-version = "1.85"
 keywords = ["ark", "serde", "serialization", "deserialization"]
 categories = ["encoding"]
+repository = "https://github.com/ait-crypto/ark-serde-compat"
 
 [dependencies]
 ark-serialize = { version = "0.5", default-features = false }
