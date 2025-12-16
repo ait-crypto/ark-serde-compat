@@ -19,7 +19,7 @@ default = ["std"]
 std = ["serde/std"]
 
 [dev-dependencies]
-rand = "0.8"
+rand = "0.9"
 serde = { version = "1", features = ["derive"] }
 bincode = { version = "2", features = ["serde"] }
 ark-bls12-381 = "0.5"
