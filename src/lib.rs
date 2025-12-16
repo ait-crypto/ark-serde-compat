@@ -1,4 +1,12 @@
+#![doc = include_str!("../README.md")]
+//! ## Usage
+//!
+//! This crate is intended to be used with serde's `#[serde(serialize_with = "ark_serde_compat")]`, `#[serde(deserialize_with = "ark_serde_compat")]`, and `#[serde(with = "ark_serde_compat")]`. Please see serde's documentation on how to use these attributes.
+
 #![cfg_attr(not(feature = "std"), no_std)]
+#![warn(missing_docs)]
+#![warn(clippy::use_self)]
+
 #[cfg(not(feature = "std"))]
 extern crate alloc;
 
@@ -13,6 +21,7 @@ use serde::{
     ser::Error as _,
 };
 
+/// Serialize and deserialize to and from compressed representations.
 pub mod compressed {
     use super::*;
 
@@ -37,6 +46,7 @@ pub mod compressed {
         }
     }
 
+    /// Serialize a value to its compressed representation.
     pub fn serialize<V, S>(value: &V, ser: S) -> Result<S::Ok, S::Error>
     where
         V: CanonicalSerialize,
@@ -49,6 +59,7 @@ pub mod compressed {
         ser.serialize_bytes(&dst)
     }
 
+    /// Deserialize a value from its compressed representation.
     pub fn deserialize<'de, V, D>(de: D) -> Result<V, D::Error>
     where
         V: CanonicalDeserialize,
@@ -58,6 +69,7 @@ pub mod compressed {
     }
 }
 
+/// Serialize and deserialize to and from uncompressed representations.
 pub mod uncompressed {
     use super::*;
 
@@ -82,6 +94,7 @@ pub mod uncompressed {
         }
     }
 
+    /// Serialize a value to its uncompressed representation.
     pub fn serialize<V, S>(value: &V, ser: S) -> Result<S::Ok, S::Error>
     where
         V: CanonicalSerialize,
@@ -94,6 +107,7 @@ pub mod uncompressed {
         ser.serialize_bytes(&dst)
     }
 
+    /// Deserialize a value from its uncompressed representation.
     pub fn deserialize<'de, V, D>(de: D) -> Result<V, D::Error>
     where
         V: CanonicalDeserialize,
@@ -104,6 +118,7 @@ pub mod uncompressed {
 }
 
 #[cfg(feature = "std")]
+/// Serialize and deserialize vectors of serializable values.
 pub mod vec {
     use super::*;
 
@@ -114,6 +129,7 @@ pub mod vec {
     where
         T: CanonicalSerialize + CanonicalDeserialize;
 
+    /// Serialize values to their compressed represnetation.
     pub fn serialize<T, S>(value: &[T], ser: S) -> Result<S::Ok, S::Error>
     where
         T: CanonicalSerialize + CanonicalDeserialize + Copy,
@@ -123,6 +139,7 @@ pub mod vec {
         tmp.serialize(ser)
     }
 
+    /// Deserializes values to their compressed represnetation.
     pub fn deserialize<'de, T, D>(de: D) -> Result<Vec<T>, D::Error>
     where
         T: CanonicalSerialize + CanonicalDeserialize,
