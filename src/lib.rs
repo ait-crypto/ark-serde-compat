@@ -1,4 +1,10 @@
-use std::{any::type_name, fmt, marker::PhantomData};
+#![cfg_attr(not(feature = "std"), no_std)]
+#[cfg(not(feature = "std"))]
+extern crate alloc;
+
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
+use core::{any::type_name, fmt, marker::PhantomData};
 
 use ark_serialize::{CanonicalDeserialize, CanonicalSerialize};
 use serde::{
@@ -97,6 +103,7 @@ pub mod uncompressed {
     }
 }
 
+#[cfg(feature = "std")]
 pub mod vec {
     use super::*;
 

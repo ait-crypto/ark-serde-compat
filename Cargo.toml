@@ -7,15 +7,16 @@ license = "Apache-2.0 OR MIT"
 edition = "2024"
 rust-version = "1.85"
 keywords = ["ark", "serde", "serialization", "deserialization"]
-categories = ["encoding"]
+categories = ["encoding", "no_std"]
 repository = "https://github.com/ait-crypto/ark-serde-compat"
 
 [dependencies]
 ark-serialize = { version = "0.5", default-features = false }
-serde = { version = "1", default-features = false, features = [
-  "std",
-  "derive",
-] }
+serde = { version = "1", default-features = false, features = ["derive"] }
+
+[features]
+default = ["std"]
+std = ["serde/std"]
 
 [dev-dependencies]
 rand = "0.8"
