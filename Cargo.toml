@@ -6,8 +6,8 @@ authors = ["Sebastian Ramacher <sebastian.ramacher@ait.ac.at>"]
 license = "Apache-2.0 OR MIT"
 edition = "2024"
 rust-version = "1.85"
-keywords = ["ark", "serde", "serialization", "deserialization"]
-categories = ["encoding", "no_std"]
+keywords = ["ark", "serde", "serialization", "deserialization", "no_std"]
+categories = ["encoding"]
 repository = "https://github.com/ait-crypto/ark-serde-compat"
 
 [dependencies]
