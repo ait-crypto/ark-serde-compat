@@ -21,7 +21,7 @@ std = ["serde/std"]
 [dev-dependencies]
 rand = "0.8"
 serde = { version = "1", features = ["derive"] }
-bincode = { version = "2", features = ["serde"] }
+serde_cbor = "0.11"
 ark-bls12-381 = "0.6"
 ark-ec = { version = "0.6", default-features = false }
 ark-ff = { version = "0.6", default-features = false }

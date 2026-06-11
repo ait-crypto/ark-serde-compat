@@ -160,7 +160,6 @@ mod test {
     use ark_bls12_381::Bls12_381;
     use ark_ec::pairing::{Pairing, PairingOutput};
     use ark_ff::UniformRand;
-    use bincode::config;
     use serde::{Deserialize, Serialize};
 
     type G1Affine = <Bls12_381 as Pairing>::G1Affine;
@@ -185,11 +184,9 @@ mod test {
         let mut rng = rand::thread_rng();
         let v = Wrapper(G1Affine::rand(&mut rng));
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 
     #[test]
@@ -197,11 +194,9 @@ mod test {
         let mut rng = rand::thread_rng();
         let v = UncommpressedWrapper(G1Affine::rand(&mut rng));
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 
     #[test]
@@ -209,11 +204,9 @@ mod test {
         let mut rng = rand::thread_rng();
         let v = Wrapper(G1Affine::rand(&mut rng));
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 
     #[test]
@@ -221,11 +214,9 @@ mod test {
         let mut rng = rand::thread_rng();
         let v = UncommpressedWrapper(G1Projective::rand(&mut rng));
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 
     #[test]
@@ -233,11 +224,9 @@ mod test {
         let mut rng = rand::thread_rng();
         let v = Wrapper(G2Affine::rand(&mut rng));
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 
     #[test]
@@ -245,11 +234,9 @@ mod test {
         let mut rng = rand::thread_rng();
         let v = UncommpressedWrapper(G2Affine::rand(&mut rng));
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 
     #[test]
@@ -257,11 +244,9 @@ mod test {
         let mut rng = rand::thread_rng();
         let v = Wrapper(G2Projective::rand(&mut rng));
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 
     #[test]
@@ -269,11 +254,9 @@ mod test {
         let mut rng = rand::thread_rng();
         let v = UncommpressedWrapper(G2Projective::rand(&mut rng));
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 
     #[test]
@@ -281,11 +264,9 @@ mod test {
         let mut rng = rand::thread_rng();
         let v = Wrapper(Gt::rand(&mut rng));
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 
     #[test]
@@ -293,11 +274,9 @@ mod test {
         let mut rng = rand::thread_rng();
         let v = UncommpressedWrapper(Gt::rand(&mut rng));
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 
     #[test]
@@ -306,20 +285,13 @@ mod test {
         let v = Wrapper(Scalar::rand(&mut rng));
         let v_uncompressed = UncommpressedWrapper(v.0);
 
-        let bin = bincode::serde::encode_to_vec(&v, config::standard()).unwrap();
-        assert_eq!(
-            bin,
-            bincode::serde::encode_to_vec(&v_uncompressed, config::standard()).unwrap()
-        );
+        let bin = serde_cbor::to_vec(&v).unwrap();
+        assert_eq!(bin, serde_cbor::to_vec(&v_uncompressed).unwrap());
 
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v, v_deserialized);
-        assert_eq!(bin.len(), len);
 
-        let (v_deserialized, len) =
-            bincode::serde::decode_from_slice(&bin, config::standard()).unwrap();
+        let v_deserialized = serde_cbor::from_slice(&bin).unwrap();
         assert_eq!(v_uncompressed, v_deserialized);
-        assert_eq!(bin.len(), len);
     }
 }
